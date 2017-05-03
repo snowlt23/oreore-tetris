@@ -171,16 +171,36 @@ function tetrisRenderLoop(tetrisState, tetrisElem) {
 }
 
 function moveRight(tetrisState) {
+    let canMove = true;
     for (var i = 0; i < tetrisState.actives.length; i++) {
         for (var j = 0; j < tetrisState.actives[i].length; j++) {
-            tetrisState.actives[i][j].x += 1;
+            if (tetrisState.actives[i][j].x+1 >= TETRIS_WIDTH) {
+                canMove = false;
+            }
+        }
+    }
+    if (canMove) {
+        for (var i = 0; i < tetrisState.actives.length; i++) {
+            for (var j = 0; j < tetrisState.actives[i].length; j++) {
+                tetrisState.actives[i][j].x += 1;
+            }
         }
     }
 }
 function moveLeft(tetrisState) {
+    let canMove = true;
     for (var i = 0; i < tetrisState.actives.length; i++) {
         for (var j = 0; j < tetrisState.actives[i].length; j++) {
-            tetrisState.actives[i][j].x -= 1;
+            if (tetrisState.actives[i][j].x-1 < 0) {
+                canMove = false;
+            }
+        }
+    }
+    if (canMove) {
+        for (var i = 0; i < tetrisState.actives.length; i++) {
+            for (var j = 0; j < tetrisState.actives[i].length; j++) {
+                tetrisState.actives[i][j].x -= 1;
+            }
         }
     }
 }
